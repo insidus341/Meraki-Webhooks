@@ -6,3 +6,12 @@ services:
     restart: always
     volumes:
       - ./webhooks.log:/app/webhooks.log
+
+      networks:
+        - proxynet
+  
+  networks:
+    proxynet:
+      external:
+        name: proxy_sites
+  
