@@ -8,12 +8,14 @@ app = Flask(__name__)
 def respond():
     try: 
         webhook = request.json
+        print(webhook)
         with open(FILE, 'a') as f:
             f.writelines(webhook)
 
         return Response(status=200)
 
-    except:
+    except Exception as e:
+        print(e)
         return Response(status=403)
 
 @app.route('/get', methods=['GET'])
@@ -23,7 +25,8 @@ def read():
             lines = f.readlines()
             return lines
 
-    except:
+    except Exception as e:
+        print(e)
         return
 
 
