@@ -5,7 +5,7 @@ services:
     container_name: meraki-webhook
     restart: always
     volumes:
-      - ./webhooks.log:/app/webhooks.log
+      - ./logs:/app/logs
 
     networks:
       - proxynet
