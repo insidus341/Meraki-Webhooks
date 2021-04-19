@@ -1,10 +1,11 @@
 from flask import Flask, request, Response
 from pathlib import Path
+import json
 
-FILE = "/logs/webhooks.log"
+FILE = "/app/logs/webhooks.log"
 
 # Create the logs folder if it doesn't exist
-Path("/logs").mkdir(parents=True, exist_ok=True)
+Path("/app/logs").mkdir(parents=True, exist_ok=True)
 
 
 app = Flask(__name__)
@@ -15,7 +16,7 @@ def respond():
         webhook = request.json
         print(webhook)
         with open(FILE, 'a') as f:
-            f.writelines(webhook)
+            f.writelines(json.dumps(webhook))
 
         return Response(status=200)
 
@@ -32,7 +33,7 @@ def read():
 
     except Exception as e:
         print(e)
-        return
+        return "unable to read webhooks"
 
 
 if __name__ == '__main__':
