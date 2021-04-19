@@ -27,9 +27,18 @@ def respond():
 @app.route('/get', methods=['GET'])
 def read():
     try:
+        lines = None
         with open(FILE, 'r') as f:
             lines = f.readlines()
-            return lines
+        
+        response = []
+        for line in lines:
+            line_json = json.loads(line)
+            response.append(json.dumps(line_json, sort_keys = False, indent = 2))
+        
+        print(response)
+        return response
+
 
     except Exception as e:
         print(e)
