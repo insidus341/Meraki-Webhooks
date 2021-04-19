@@ -16,7 +16,7 @@ def respond():
         webhook = request.json
         print(webhook)
         with open(FILE, 'a') as f:
-            f.writelines(json.dumps(webhook))
+            f.writelines(json.dumps(webhook) + "\n")
 
         return Response(status=200)
 
@@ -33,9 +33,12 @@ def read():
         
         response = ""
         for line in lines:
+            if line == "\n":
+                continue
+            
             line_json = json.loads(line)
             response = response + str(json.dumps(line_json, sort_keys = False, indent = 2))
-            
+
         return response
 
 
