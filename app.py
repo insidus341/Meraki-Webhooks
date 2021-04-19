@@ -4,7 +4,7 @@ FILE = "webhooks.log"
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/post', methods=['POST'])
 def respond():
     try: 
         webhook = request.json
@@ -16,7 +16,7 @@ def respond():
     except:
         return Response(status=403)
 
-@app.route('/read', methods=['GET'])
+@app.route('/get', methods=['GET'])
 def read():
     try:
         with open(FILE, 'r') as f:
@@ -28,4 +28,4 @@ def read():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=5010)

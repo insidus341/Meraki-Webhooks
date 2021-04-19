@@ -2,8 +2,6 @@ version: "3"
 services: 
   meraki-webhook:
     build: .
-    ports: 
-      - "5001:80"
     container_name: meraki-webhook
     restart: always
     volumes:
