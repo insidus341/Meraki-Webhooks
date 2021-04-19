@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, render_template
 from pathlib import Path
 import json
 
@@ -27,19 +27,23 @@ def respond():
 @app.route('/get', methods=['GET'])
 def read():
     try:
-        lines = None
-        with open(FILE, 'r') as f:
-            lines = f.readlines()
+        # lines = None
+        # with open(FILE, 'r') as f:
+        #     lines = f.readlines()
         
-        response = ""
-        for line in lines:
-            if line == "\n":
-                continue
-            
-            line_json = json.loads(line)
-            response = response + str(json.dumps(line_json, sort_keys = False, indent = 2))
+        response = []
 
-        return response
+        lines = [
+            '{"version": "0.1", "sharedSecret": "", "sentAt": "2021-04-19T16:10:12.595753Z", "organizationId": "811478", "organizationName": "James Earl - original", "organizationUrl": "https://n146.meraki.com/o/2APjxb/manage/organization/overview", "networkId": "L_645140646620825042", "networkName": "Home", "networkUrl": "https://n146.meraki.com/Home-appliance/n/pHbVWdsc/manage/nodes/wired_status", "networkTags": [], "deviceSerial": "Q2FY-2CZG-UDZG", "deviceMac": "2c:3f:0b:b5:da:15", "deviceName": "Don S Davis", "deviceUrl": "https://n146.meraki.com/Home-appliance/n/pHbVWdsc/manage/nodes/new_wired_status", "deviceTags": [], "deviceModel": "MX67", "alertId": "", "alertType": "Power supply went down", "alertTypeId": "power_supply_down", "alertLevel": "critical", "occurredAt": "2021-04-19T16:10:12.594180Z", "alertData": {}}'
+        ]
+        for line in lines:
+
+            line_json = json.loads(line)
+            response.append(str(json.dumps(line_json, sort_keys = False, indent = 2)))
+
+        return render_template('get.html', webhooks=response.reverse())
+
+        # return response
 
 
     except Exception as e:
