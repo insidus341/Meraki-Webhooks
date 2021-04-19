@@ -31,12 +31,11 @@ def read():
         with open(FILE, 'r') as f:
             lines = f.readlines()
         
-        response = []
+        response = ""
         for line in lines:
             line_json = json.loads(line)
-            response.append(json.dumps(line_json, sort_keys = False, indent = 2))
-        
-        print(response)
+            response = response + str(json.dumps(line_json, sort_keys = False, indent = 2))
+            
         return response
 
 
