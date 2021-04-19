@@ -7,9 +7,10 @@ services:
     volumes:
       - ./webhooks.log:/app/webhooks.log
 
-      networks:
-        - proxynet
-  
+    networks:
+      - proxynet
+
+
   networks:
     proxynet:
       external:
