@@ -11,8 +11,8 @@ services:
       - proxynet
 
 
-  networks:
-    proxynet:
-      external:
-        name: proxy_sites
+networks:
+  proxynet:
+    external:
+      name: proxy_sites
   
