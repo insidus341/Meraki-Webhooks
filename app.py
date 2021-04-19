@@ -1,10 +1,10 @@
 from flask import Flask, request, Response
 from pathlib import Path
 
-FILE = "~/app/logs/webhooks.log"
+FILE = "/logs/webhooks.log"
 
 # Create the logs folder if it doesn't exist
-Path("~/app/logs").mkdir(parents=True, exist_ok=True)
+Path("/logs").mkdir(parents=True, exist_ok=True)
 
 
 app = Flask(__name__)
